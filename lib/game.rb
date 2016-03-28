@@ -21,7 +21,7 @@ class Game
   end
 
   def current_player
-    self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
+    self.board.turn_count.even? ? self.player_1 : self.player_2
   end
 
   def over?
@@ -50,8 +50,8 @@ class Game
   end
 
   def winner
-    if self.won?
-      self.board.cells[self.won?[0]]
+    if won = self.won?
+      self.board.cells[won[0]]
     end
   end
 

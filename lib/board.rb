@@ -44,11 +44,7 @@ class Board
   end
 
   def turn_count
-    turn_count = 0
-    ('1'..'9').each do |index|
-      turn_count += 1 if taken?(index)
-    end
-    turn_count
+    ('1'..'9').count{ |index| taken?(index) }
   end
 
   def valid_move?(input)
@@ -65,7 +61,7 @@ class Board
     hypo.token_1 = board.token_1.dup
     hypo.token_2 = board.token_2.dup
     int_position = position.to_i - 1
-    hypo.turn_count % 2 == 0 ? hypo.cells[int_position] = hypo.token_1 : hypo.cells[int_position] = hypo.token_2
+    hypo.turn_count.even? ? hypo.cells[int_position] = hypo.token_1 : hypo.cells[int_position] = hypo.token_2
     hypo
   end
 end

@@ -8,8 +8,8 @@ class Player::Computer < Player
   end
 
   def score(board, depth)
-    if self.won?(board)
-      if board.cells[self.won?(board)[0]] == self.token
+    if won = self.won?(board)
+      if board.cells[won[0]] == self.token
         return 10 - depth
       else
         return depth - 10
@@ -20,7 +20,7 @@ class Player::Computer < Player
   end
 
   def current_player?(board)
-    if board.turn_count % 2 == 0
+    if board.turn_count.even?
       self.token == board.token_1
     else
       self.token == board.token_2
